@@ -56,37 +56,37 @@ public class MainActivityTest {
 
     @Before
     public void setup(){
-        onView(withId(R.id.action_search)).perform(click());
+        onView(withId(R.id.get_news)).perform(click());
     }
 
     @Test
     public void testRecyclerViewIsDisplayed(){
-        onView(withId(R.id.news_recyclerview)).check(matches(isDisplayed()));
+        onView(withId(R.layout.news_recyclerview)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testRecyclerViewNotEmpty(){
-        onView(withRecyclerView(R.id.news_recyclerview).atPosition(0))
+        onView(withRecyclerView(R.layout.news_recyclerview).atPosition(0))
                 .check(matches(hasDescendant(isDisplayed())));
     }
 
     @Test
     public void testItemsTextViewsHaveRightText(){
-        onView(withRecyclerView(R.id.news_recyclerview).atPosition(0))
+        onView(withRecyclerView(R.layout.news_recyclerview).atPosition(0))
                 .check(matches(hasDescendant(withText(containsString("Title")))));
     }
 
 
     @Test
     public void testRecyclerViewItemClick(){
-        onView(withId(R.id.action_search)).perform(click());
+        onView(withId(R.id.get_news)).perform(click());
 
         Intents.init();
         Matcher<Intent> expectedIntent = allOf(hasAction(Intent.ACTION_VIEW));
         intending(expectedIntent).respondWith(new Instrumentation.ActivityResult(0, null));
 
 
-        onView(withId(R.id.news_recyclerview))
+        onView(withId(R.layout.news_recyclerview))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         intended(expectedIntent);

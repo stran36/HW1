@@ -1,5 +1,6 @@
 package com.example.rkjc.news_app_2;
 
+import org.json.JSONObject;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -12,13 +13,18 @@ public class JSONTest {
 
     @Test
     public void parseJSONReturnsNonEmptyList(){
-        ArrayList<NewsItem> items = JsonUtils.parseNews(testString);
-        assertTrue(!items.isEmpty());
+        try {
+            JSONObject jsonObject = new JSONObject(testString);
+            ArrayList<NewsItem> items = JsonUtils.parseNews(jsonObject);
+            assertTrue(!items.isEmpty());
+        }catch (Exception e){e.getStackTrace();}
     }
 
     @Test
     public void parseJSONReturnsValidList(){
-        ArrayList<NewsItem> items = JsonUtils.parseNews(testString);
+        try{
+            JSONObject jsonObject = new JSONObject(testString);
+        ArrayList<NewsItem> items = JsonUtils.parseNews(jsonObject);
         NewsItem newsItem = items.get(0);
 
         assertTrue(newsItem.getTitle().equals("IBM's acquisition of Red Hat is " +
@@ -26,5 +32,6 @@ public class JSONTest {
         assertTrue(newsItem.getDescription().contains("IBM today announced it would be acquiring " +
                 "iconic Linux firm Red Hat in a $34 billion all-cash deal."));
         assertTrue(newsItem.getUrl().equals("https://thenextweb.com/dd/2018/10/28/ibms-acquisition-of-red-hat-is-huge-news-for-the-linux-world/"));
+    }catch(Exception e){e.getStackTrace();}
     }
 }
