@@ -1,15 +1,20 @@
 package com.example.rkjc.news_app_2;
 
-import java.net.URL;
+public class NewsItem
+{
+    private String author;
+    private String title;
+    private String description;
+    private String url;
+    private String urlToImage;
+    private String publishedAt;
 
-public class NewsItem {
-    public String author;
-    public String title;
-    public String description;
-    public String url;
-    public String urlToImage;
-    public String publishedAt;
-    public NewsItem(String author, String title, String description, String url, String urlToImage, String publishedAt){
+    public NewsItem() {
+
+    }
+
+
+    public NewsItem(String author, String title, String description, String url, String urlToImage, String publishedAt) {
         this.author = author;
         this.title = title;
         this.description = description;
@@ -17,48 +22,54 @@ public class NewsItem {
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
     }
-    public String getAuthor(){
+
+    public String getAuthor() {
         return author;
-    }
-    public String getTitle(){
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-    public String getUrlToImage() {
-        return urlToImage;
-    }
-
-    public String getPublishedAt() {
-        return publishedAt;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getUrlToImage() {
+        return urlToImage;
     }
 
     public void setUrlToImage(String urlToImage) {
         this.urlToImage = urlToImage;
     }
-    public void setPublishedAt(String publishedAt){
+
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
+
+
 }

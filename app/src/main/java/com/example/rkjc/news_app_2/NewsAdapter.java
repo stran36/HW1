@@ -5,80 +5,86 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.net.URL;
 import java.util.ArrayList;
 
 
-public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHolder> {
-    private ArrayList<NewsItem> newsItem;
+public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>
+{
+
+    ArrayList<NewsItem>newsItems;
     Context context;
 
-    public class NewsItemViewHolder extends RecyclerView.ViewHolder{
-        public TextView textViewTitle;
-        public TextView textViewDescription;
-        public TextView textViewDate;
-        public NewsItemViewHolder(View view) {
-            super(view);
-            textViewTitle =(TextView) view.findViewById(R.id.title);
-            textViewDescription =(TextView) view.findViewById(R.id.description);
-            textViewDate =(TextView) view.findViewById(R.id.date);
-        }
-    }
-    public NewsAdapter(ArrayList<NewsItem> newsItem, Context context){
-        this.newsItem = newsItem;
+    public NewsAdapter(ArrayList<NewsItem> newsContent, Context context) {
+        this.newsItems = newsContent;
         this.context = context;
     }
-    public int getItemCount(){
-        return newsItem.size();
-    }
-    @Override
+
     @NonNull
-    public NewsAdapter.NewsItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.news_recylcerview, parent, false);
-        NewsItemViewHolder viewHolder = new NewsItemViewHolder(view);
-        return viewHolder;
-    }
     @Override
-    @NonNull
-    public void onBindViewHolder(@NonNull NewsItemViewHolder holder, final int position){
-        holder.textViewTitle.setText(newsItem.get(position).getTitle());
-        holder.textViewDescription.setText(newsItem.get(position).getDescription());
-        holder.textViewDate.setText(newsItem.get(position).getPublishedAt());
-        holder.textViewDescription.setOnClickListener(new View.OnClickListener(){
+    public NewsAdapter.NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_recyclerview, parent, false);
+        NewsViewHolder vh = new NewsViewHolder(v);
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull NewsAdapter.NewsViewHolder holder, final int position)
+    {
+        holder.title.setText(newsItems.get(position).getTitle());
+        holder.description.setText(newsItems.get(position).getDescription());
+        holder.date.setText(newsItems.get(position).getPublishedAt());
+
+        holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                final String url = newsItem.get(position).getUrl();
-                openWebPage(url);
+            public void onClick(View v) {
+                final String m = newsItems.get(position).getUrl();
+
+                openWebPage(m);
             }
         });
 
-    }
-    public void openWebPage(String url){
-        Uri page = Uri.parse(url);
 
+    }
+    public void openWebPage(String url) {
+
+        Uri webpage = Uri.parse(url);
 
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            page = Uri.parse("http://" + url);
+            webpage = Uri.parse("http://" + url);
         }
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, page);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
         }
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
+    public int getItemCount() {
+
+        return newsItems.size();
+    }
+
+
+    public class NewsViewHolder extends RecyclerView.ViewHolder
+    {
+        private TextView title;
+        private TextView description;
+        private TextView date;
+
+        public NewsViewHolder(View itemView) {
+            super(itemView);
+            title = (TextView)itemView.findViewById(R.id.title);
+            description = (TextView)itemView.findViewById(R.id.description);
+            date = (TextView)itemView.findViewById(R.id.date);
+
+
+        }
     }
 }
-
