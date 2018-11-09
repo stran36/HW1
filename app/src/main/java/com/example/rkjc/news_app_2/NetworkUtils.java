@@ -2,7 +2,6 @@ package com.example.rkjc.news_app_2;
 
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -14,23 +13,18 @@ import java.util.Scanner;
 
 public class NetworkUtils {
 
-
-    public static final String BASE = "newsapi.org";
-    public static final String API_KEY = "77d4192360434c08a359e97da122f252";
-
-    public static String jsonString;
-    private static JsonUtils jsonUtils;
+    private static String jsonString;
 
     public static URL buildUrl() throws MalformedURLException {
 
         Uri.Builder buildURL = new Uri.Builder();
         buildURL.scheme("https")
-                .authority(BASE)
+                .authority("newsapi.org")
                 .appendPath("v1")
                 .appendPath("articles")
                 .appendQueryParameter("source", "the-next-web")
                 .appendQueryParameter("sortBy", "latest&apiKey")
-                .appendQueryParameter("apiKey", API_KEY);
+                .appendQueryParameter("apiKey", "77d4192360434c08a359e97da122f252");
 
         URL url = new URL(buildURL.toString());
 
@@ -56,6 +50,7 @@ public class NetworkUtils {
                 jsonString = scanner.next();
                 JSONObject jsonObject = new JSONObject(jsonString);
 
+                JsonUtils jsonUtils = new JsonUtils();
                 jsonUtils.parseNews(jsonObject);
                 return jsonString;
 

@@ -9,11 +9,6 @@ public class NewsItem
     private String urlToImage;
     private String publishedAt;
 
-    public NewsItem() {
-
-    }
-
-
     public NewsItem(String author, String title, String description, String url, String urlToImage, String publishedAt) {
         this.author = author;
         this.title = title;
@@ -64,10 +59,12 @@ public class NewsItem
     }
 
     public String getPublishedAt() {
+
         return publishedAt;
     }
 
     public void setPublishedAt(String publishedAt) {
+
         this.publishedAt = publishedAt;
     }
 
