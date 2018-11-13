@@ -12,19 +12,28 @@ public class JSONTest {
 
     @Test
     public void parseJSONReturnsNonEmptyList(){
+        try{
         ArrayList<NewsItem> items = JsonUtils.parseNews(testString);
         assertTrue(!items.isEmpty());
+        }catch(Exception e){
+            e.getStackTrace();
+        }
+
     }
 
     @Test
     public void parseJSONReturnsValidList(){
-        ArrayList<NewsItem> items = JsonUtils.parseNews(testString);
-        NewsItem newsItem = items.get(0);
+        try {
+            ArrayList<NewsItem> items = JsonUtils.parseNews(testString);
+            NewsItem newsItem = items.get(0);
 
-        assertTrue(newsItem.getTitle().equals("IBM's acquisition of Red Hat is " +
-                "massive for the Linux world"));
-        assertTrue(newsItem.getDescription().contains("IBM today announced it would be acquiring " +
-                "iconic Linux firm Red Hat in a $34 billion all-cash deal."));
-        assertTrue(newsItem.getUrl().equals("https://thenextweb.com/dd/2018/10/28/ibms-acquisition-of-red-hat-is-huge-news-for-the-linux-world/"));
+            assertTrue(newsItem.getTitle().equals("IBM's acquisition of Red Hat is " +
+                    "massive for the Linux world"));
+            assertTrue(newsItem.getDescription().contains("IBM today announced it would be acquiring " +
+                    "iconic Linux firm Red Hat in a $34 billion all-cash deal."));
+            assertTrue(newsItem.getUrl().equals("https://thenextweb.com/dd/2018/10/28/ibms-acquisition-of-red-hat-is-huge-news-for-the-linux-world/"));
+        }catch (Exception e){
+            e.getStackTrace();
+        }
     }
 }

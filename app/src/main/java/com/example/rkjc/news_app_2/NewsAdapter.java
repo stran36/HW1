@@ -24,7 +24,7 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.NewsViewHolde
     @Override
     public NewsAdapter.NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.news_recyclerview, parent, false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main, parent, false);
         NewsViewHolder viewHolder = new NewsViewHolder(view);
         return viewHolder;
     }
@@ -36,6 +36,22 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.NewsViewHolde
         holder.description.setText(newsItems.get(position).getDescription());
         holder.date.setText(newsItems.get(position).getPublishedAt());
         holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String url = newsItems.get(position).getUrl();
+
+                openWebPage(url);
+            }
+        });
+        holder.description.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String url = newsItems.get(position).getUrl();
+
+                openWebPage(url);
+            }
+        });
+        holder.date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String url = newsItems.get(position).getUrl();

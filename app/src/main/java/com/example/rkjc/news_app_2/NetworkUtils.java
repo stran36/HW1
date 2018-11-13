@@ -48,10 +48,8 @@ public class NetworkUtils {
             if (hasInput) {
 
                 jsonString = scanner.next();
-                JSONObject jsonObject = new JSONObject(jsonString);
-
                 JsonUtils jsonUtils = new JsonUtils();
-                jsonUtils.parseNews(jsonObject);
+                jsonUtils.parseNews(jsonString);
                 return jsonString;
 
             } else {

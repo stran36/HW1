@@ -7,8 +7,9 @@ import java.util.ArrayList;
 
 public class JsonUtils
 {
-    public static ArrayList<NewsItem>parseNews(JSONObject jsonObject) throws JSONException
+    public static ArrayList<NewsItem>parseNews(String jsonString) throws JSONException
     {
+        JSONObject jsonObject = new JSONObject(jsonString);
         ArrayList<NewsItem> newsItems = new ArrayList<>();
         JSONArray jArray = jsonObject.getJSONArray("articles");
         if (jArray != null) {

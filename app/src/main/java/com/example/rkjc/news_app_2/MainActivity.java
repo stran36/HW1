@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 String jsonString = networkUtils.new NewsQueryTask().execute().get();
                 jsonObject = new JSONObject(jsonString);
-                newsItems = jsonUtils.parseNews(jsonObject);
+                newsItems = jsonUtils.parseNews(jsonString);
                 adapter = new NewsAdapter(newsItems, this);
             } catch (Exception e) {
                 e.getStackTrace();
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.news_recyclerview);
 
         try {
             if (jsonObject == null) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }String jsonString = networkUtils.new NewsQueryTask().execute().get();
             jsonObject = new JSONObject(jsonString);
 
-            newsItems = jsonUtils.parseNews(jsonObject);
+            newsItems = jsonUtils.parseNews(jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         recyclerView.setAdapter(adapter);
     }
     @Override
