@@ -24,7 +24,7 @@ public class NetworkUtils {
                 .appendPath("articles")
                 .appendQueryParameter("source", "the-next-web")
                 .appendQueryParameter("sortBy", "latest&apiKey")
-                .appendQueryParameter("apiKey", "77d4192360434c08a359e97da122f252");
+                .appendQueryParameter("apiKey", "fbf9379127974f45919b4f3d16b37439");
 
         URL url = new URL(buildURL.toString());
 

@@ -24,7 +24,7 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.NewsViewHolde
     @Override
     public NewsAdapter.NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main, parent, false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
         NewsViewHolder viewHolder = new NewsViewHolder(view);
         return viewHolder;
     }
@@ -32,9 +32,9 @@ public class NewsAdapter  extends RecyclerView.Adapter<NewsAdapter.NewsViewHolde
     @Override
     public void onBindViewHolder(NewsAdapter.NewsViewHolder holder, final int position)
     {
-        holder.title.setText(newsItems.get(position).getTitle());
-        holder.description.setText(newsItems.get(position).getDescription());
-        holder.date.setText(newsItems.get(position).getPublishedAt());
+        holder.title.setText("Title"+ newsItems.get(position).getTitle());
+        holder.description.setText("Description"+ newsItems.get(position).getDescription());
+        holder.date.setText("Date"+ newsItems.get(position).getPublishedAt());
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
